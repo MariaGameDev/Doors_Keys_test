@@ -18,23 +18,27 @@ public class AttributeManager : MonoBehaviour
         if(other.gameObject.tag == "BLUE_KEY")
         {
             attributes |= BLUEKEY;
-            Destroy(other.gameObject);
+            SoundManager.PlaySound(SoundManager.SoundType.KeyPick);
+            Destroy(other.gameObject,.1f);
         }
         else if (other.gameObject.tag == "RED_KEY")
         {
             attributes |= REDKEY;
-            Destroy(other.gameObject);
+            SoundManager.PlaySound(SoundManager.SoundType.KeyPick);
+            Destroy(other.gameObject, .1f);
         }
         else if (other.gameObject.tag == "GREEN_KEY")
         {
             attributes |= GREENKEY;
-            Destroy(other.gameObject);
+            SoundManager.PlaySound(SoundManager.SoundType.KeyPick);
+            Destroy(other.gameObject, .1f);
         }
-        else if (other.gameObject.tag == "GOLD_KEY")
+       /* else if (other.gameObject.tag == "GOLD_KEY")
         {
             attributes |= (BLUEKEY | REDKEY | GREENKEY);
-            Destroy(other.gameObject);
-        }
+            SoundManager.PlaySound(SoundManager.SoundType.KeyPick);
+            Destroy(other.gameObject, .2f);
+        } */
     }
 
     

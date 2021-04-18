@@ -21,27 +21,38 @@ public class DoorManager : MonoBehaviour
 
     private void OnTriggerEnter(Collider other)
     {
-       
-        
+        if (other.gameObject.GetComponent<AttributeManager>().attributes != doorType && isOpen == false)
+        {
+            SoundManager.PlaySound(SoundManager.SoundType.Alarm);
+
+        }
+
+
             if ((other.gameObject.GetComponent<AttributeManager>().attributes & doorType) == doorType)
             {
 
                 Debug.Log("TRIGGER ENTER");
+            
+           
 
-              
-                PlayAnimation();
+              PlayAnimation();
 
 
             }
-        
-        
+
+       
     }
 
    
 
     void OnTriggerExit(Collider other)
     {
-        other.gameObject.GetComponent<AttributeManager>().attributes &= ~doorType;
+        if (isOpen == true)
+        {
+            other.gameObject.GetComponent<AttributeManager>().attributes &= ~doorType;
+        }
+        
+        
 
         Debug.Log(doorType + "EXIT");
     } 
@@ -77,6 +88,7 @@ public class DoorManager : MonoBehaviour
         if (!isOpen && !pauseInteraction)
         {
             doorAnimator.Play(doorOpen, 0, 0.0f);
+            SoundManager.PlaySound(SoundManager.SoundType.Door);
             isOpen = true;
             StartCoroutine(PauseDoorInteraction());
         }
